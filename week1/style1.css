@@ -15,10 +15,10 @@ body {
   .logo {
     flex: 0 0 150px; /* Adjust logo width here */
   }
-  
+ 
   nav {
     flex: 1;
-    text-align: center;
+    text-align: left;
   }
   
   nav ul {
@@ -35,6 +35,11 @@ body {
   nav a {
     text-decoration: none;
     color: black;
+  }
+   
+  section {
+    font-size: 40px; /*Welcome text in the light-blue section is twice the base size*/
+    background-color: lightblue;
   }
   
   main {
@@ -58,16 +63,10 @@ body {
     flex-wrap: wrap; /* Allow content to wrap on smaller screens */
   }
   
-  article {
-    flex: 2 1 fr; /* Adjust main content width here */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-  }
-  
   aside {
     flex: 1 0 250px; /* Adjust sidebar width here */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
   }
+  
