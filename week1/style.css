@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial;
     margin: 0;
     padding: 0;
   }
@@ -10,6 +10,7 @@ body {
     background-color: #f0f0f0;
     padding:20px;
     display: flex;
+    justify-content: space-between;
     text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
     align-items: center; /*Title and menu items should be vertically centered with each other.*/
   }
