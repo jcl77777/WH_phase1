@@ -1,5 +1,5 @@
 body {
-    font-family: Arial;
+    font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
   }
@@ -89,8 +89,12 @@ body {
 /*Requirement 2: 600px < screen width <= 1200px*/
 @media (min-width: 600px) and (max-width: 1200px) {
     header {
-      background-color: #e0e0e0;
-      padding: 15px;
+      background-color: #f0f0f0;
+      padding:20px;
+      display: flex;
+      justify-content: space-between;
+      text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
+      align-items: center; /*Title and menu items should be vertically centered with each other.*/
     }
     main {
       width: 90%;
@@ -101,8 +105,12 @@ body {
 /*Requirement 3: 360px < screen width <= 600px*/
 @media (mid-width: 360px) and (max-width: 600px) {
     header {
-        background-color: #e0e0e0;
-        padding: 15px;
+      background-color: #f0f0f0;
+      padding:20px;
+      display: flex;
+      justify-content: space-between;
+      text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
+      align-items: center; /*Title and menu items should be vertically centered with each other.*/
       }
     main {
       width: 90%;
