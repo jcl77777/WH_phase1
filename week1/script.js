@@ -3,16 +3,14 @@ var isSideMenuOpen = false;
 
 function toggleMenu() {
   var sideMenu = document.getElementById("side-menu");
-  
+
   if (isSideMenuOpen) {
     // If the menu is open, close it
-    sideMenu.style.width = '0px';
+    sideMenu.classList.remove('open');
     isSideMenuOpen = false;
   } else {
     // If the menu is closed, open it
-    sideMenu.style.width = '250px';
+    sideMenu.classList.add('open');
     isSideMenuOpen = true;
   }
 }
-
-  
