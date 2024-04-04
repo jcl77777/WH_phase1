@@ -1,120 +1,338 @@
 body {
     font-family: 'Times New Roman', Times, serif;
+    align-items: flex-end;
     margin: 0;
     padding: 0;
   }
+  .banner {
+    width: 100%;
+    height: 250px;
+    background-color: lightblue;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .banner h1 {  
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center; 
+    margin: 0; /* Remove default margins for better centering */
+  }
 
+  main {
+    width:1200px; /*Layout of main content should be fixed in 1200px width, and centered horizontally.*/
+    padding: 20px;
+    margin: 0 auto;  /* Center the content horizontally */
+    display: flex;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+    row-gap:20px;
+  }
 /*Requirement 1: 1200px < screen width <= 1920px*/
   @media (min-width: 1200px) and (max-width: 1920px) {
   header {
-    background-color: #f0f0f0;
-    padding:20px;
+      background-color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
+      align-items: center; /*Title and menu items should be vertically centered with each other.*/
+    }
+
+  header .header-content{
+    font-weight: bold;
+  }
+ 
+  
+  header .menu-icon {
+    display: none; /* Initially hide close icon */
+  }
+  header .closebtn {
+    display: none; /* Initially hide close icon */
+  }
+
+  .small-boxes-wrapper {
+    width: 1200px;
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width */
+    flex-wrap: wrap;
+    overflow: hidden;
+    column-gap: 20px;
+  }
+  
+  .small-box {
+    height: 50px;
+    display:flex;
+    text-align: center;
+    background-color: lightblue;
+    }
+  
+  .small-box img {
+    width: 80px;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+  
+  .big-boxes-wrapper {
+    width: 1200px;
+    display: grid; 
+    grid-template-columns: 2fr repeat(4, 1fr); /* Define grid lines to have first 2x bigger than the rest */
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+  
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+.big-box img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Background image covers the box */
+}
+
+.big-box .big-box-content {
+    position: absolute; /* Position content on top of background image */
+    width: 100%;
+    height: 30px; 
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    text-align: center;
+    line-height: 30px;  /* to center the content */
+}
+
+.big-box .star-icon {
+    position: absolute; /* Make icon positionable within content */
+    top: 5px;
+    right: 5px;
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size  */
+  }
+}
+/*Requirement 2: 600px < screen width <= 1200px*/
+@media (min-width: 600px) and (max-width: 1200px) {
+  header {
+    background-color: white;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
     align-items: center; /*Title and menu items should be vertically centered with each other.*/
   }
+  header .header-content{
+    font-weight: bold;
+  }
 
-  nav {
-    flex: 1;
-    text-align: right; /*Menu items in the navbar should be aligned to the rightmost of the entire screen.*/
-    align-items: center;
+  header .menu-icon {
+    display: none; /* Initially hide close icon */
   }
-  
-  nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: black;
+  header .closebtn {
+    display: none; /* Initially hide close icon */
   }
   
   main {
-    padding: 20px;
-    width:1200px; /*Layout of main content should be fixed in 1200px width, and centered horizontally.*/
-    align-self: center;
-  }
-  
-  .banner {
-    width: 100%;
-    height: 250px; 
-    text-align: center; /*Welcome text should be horizontally and vertically centered.*/
-    align-items: center;
-    font-size: 40px;
-    font-size: 40px; /*Welcome text in the light-blue section is twice the base size*/
-    background-color: lightblue;
-  }
-  
-  .content-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
-  }
-  
-  .smallbox {
-    height:50px;
-    width:33%;
-    align-items:flex-start;
-    text-align: center; /*Text in the box should be aligned to the left and vertically centered.*/
+    width: 90%; /* Adjusts width to 90% at the breakpoint */
   }
 
-  .smallbox img {
-    align-items: left;
-    width:80px;
-    height:fit-content;
+  .small-boxes-wrapper {
+    display:grid;
+    width: 100%; /* 100% width for single column */
+    grid-template-columns: repeat(2, 1fr); /* Two columns in first row */
+    grid-template-rows: 1fr;  /* First row fixed height, second row auto */
+    flex-wrap: wrap;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
   }
 
-  .bigbox-column{
-    width:186px;
-    margin-right: 20px;
-  }
-  .bigbox-text{
-    background-image: transparent;
+  .small-box {
+    height: 50px;
+    display:flex;
     text-align: center;
-    height: 20px;
+    background-color: lightblue;
+    }
+  .small-boxes-wrapper .small-box:nth-child(3) { /* Style the third box */
+      grid-column: 1 / span 2; /* Spans both columns in the second row (100% width) */
   }
-  .bigbox img{
-    width:186px;
-    margin-right: 20px;
+  
+  .small-box img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
   }
+  
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+
+  .big-boxes-wrapper {
+    width: 1200px;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* Four columns, 25% each (first two rows) */
+    grid-template-rows: repeat(2, 1fr) 1fr;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+  .big-boxes-wrapper .big-box:nth-child(n+9) { /* Style the 9th and 10th box */
+      grid-column: span 2; /* Spans two columns in the last row (50% width) */
+  }
+
+  .big-box img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Background image covers the box */
+  }
+
+  .big-box .big-box-content {
+      position: absolute; /* Position content on top of background image */
+      width: 100%;
+      height: 30px; 
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      text-align: center;
+      line-height: 30px;  /* to center the content */
+  }
+
+  .big-box .star-icon {
+      position: absolute; /* Make icon positionable within content */
+      top: 5px;
+      right: 5px;
+      width: 20px; /* Adjust icon size */
+      height: 20px; /* Adjust icon size  */
+    }
+}
+/*Requirement 3: 360px < screen width <= 600px*/
+@media (min-width: 360px) and (max-width: 600px) {
+  .header-container {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center; /*Title and menu items should be vertically centered with each other.*/
+  }
+  header .header-content{
+    font-weight: bold;
+  }
+  .menu-icon {
+    cursor: pointer;
+    font-size: 30px;
+  }
+
+  .side-nav {
+    width:0px;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column; /* stacks children vertically */
+  }
+ 
+  .menu-items {
+    padding: 20px 20px; /* Vertical and horizontal padding */
+    font-size: 30px; /* Adjust the font size as necessary */
+    cursor: pointer;
+    display: block; /* makes each link take up the full width of its line */
+    text-decoration: none; /* removes the underline from links */
+    color: gray; /* sets the text color for each link */
+    text-align:center;
+  }
+  
+  .side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  main {
+    width: 90%; /* Adjusts width to 90% at the breakpoint */
+  }
+
+  .small-boxes-wrapper {
+    width:100%;
+    display:grid;
+    grid-template-columns:  1fr; /* one column  */
+    flex-wrap: wrap;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+  .small-box {
+    height: 50px;
+    display:flex;
+    text-align: center;
+    background-color: lightblue;
+    }
+  
+  .small-box img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+
+  .big-boxes-wrapper {
+    width:100%;
+    display: grid; 
+    grid-template-columns: 1fr; /* Define grid lines to one at a time */
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+.big-box img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Background image covers the box */
 }
 
-/*Requirement 2: 600px < screen width <= 1200px*/
-@media (min-width: 600px) and (max-width: 1200px) {
-    header {
-      background-color: #f0f0f0;
-      padding:20px;
-      display: flex;
-      justify-content: space-between;
-      text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
-      align-items: center; /*Title and menu items should be vertically centered with each other.*/
-    }
-    main {
-      width: 90%;
-      margin: 0 auto;
-      /* Adjust layout for medium screens here */
-    }
+.big-box .big-box-content {
+    position: absolute; /* Position content on top of background image */
+    width: 100%;
+    height: 30px; 
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    text-align: center;
+    line-height: 30px;  /* to center the content */
+}
+
+.big-box .star-icon {
+    position: absolute; /* Make icon positionable within content */
+    top: 5px;
+    right: 5px;
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size  */
   }
-/*Requirement 3: 360px < screen width <= 600px*/
-@media (mid-width: 360px) and (max-width: 600px) {
-    header {
-      background-color: #f0f0f0;
-      padding:20px;
-      display: flex;
-      justify-content: space-between;
-      text-align: left; /* Title in the navbar should be aligned to the leftmost of the entire screen.*/
-      align-items: center; /*Title and menu items should be vertically centered with each other.*/
-      }
-    main {
-      width: 90%;
-      margin: 0 auto;
-      /* Adjust layout for medium screens here */
-    }
+  
 }

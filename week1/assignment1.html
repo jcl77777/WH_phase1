@@ -8,29 +8,98 @@
 </head>
 <body>
     <header>
-        <div class="Website">My Website</div>
-        <nav>
-        <ul>
-            <li><a href="#">Item 1</a></li>
-            <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
-            <li><a href="#">Item 4</a></li>
-        </ul>
-        </nav>
+        <div class="header-container">
+          <div class="header-content">My Website</div>
+          <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+        <div id="side-menu" class="side-nav">
+          <span class="closebtn" onclick="toggleMenu()">×</span>
+          <span class="menu-items">Item 1</span>
+          <span class="menu-items">Item 2</span>
+          <span class="menu-items">Item 3</span>
+          <span class="menu-items">Item 4</span>
+        </div>
     </header>
+
+    <div class="banner">
+        <h1>Welcome to My Home</h1>
+    </div>
     <main>
-        <section class="banner">Welcome to My Home</section>
-        <section class="content-wrapper">
-            <div class="smallbox"></div>
-                <img src="item.jpeg" alt="Promotion 1"/>
-                <img src="item.jpeg" alt="Promotion 2"/>
-                <img src="item.jpeg" alt="Promotion 3"/>
-            <div class="bigbox"></div>
-                <img src="item.jpeg" alt="title 1"/>
-                <img src="item.jpeg" alt="title 2"/>
-                <img src="item.jpeg" alt="title 3"/>
-        </section>
+        <div class="small-boxes-wrapper">
+            <div class="small-box">
+              <img src="item.jpeg" alt="promotion 1">
+              <p>Promotion 1</p>
+            </div>
+            <div class="small-box">
+              <img src="item.jpeg" alt="promotion 2">
+              <p>Promotion 2</p>
+            </div>
+            <div class="small-box">
+              <img src="item.jpeg" alt="promotion 3">
+              <p>Promotion 3</p>
+            </div>
+          </div>
+        <div class="big-boxes-wrapper">
+            <div class="big-box">
+              <img src="item.jpeg" alt="title 1">
+              <img src="star.png" alt="Star Icon" class="star-icon">
+              <div class="big-box-content">Title 1</div>
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 2">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 2
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 3">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 3
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 4">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 4
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 5">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 5</div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 6">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 6
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 7">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 7
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 8">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 8
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 9">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 9
+                </div>      
+            </div>
+            <div class="big-box">
+                <img src="item.jpeg" alt="title 10">
+                <img src="star.png" alt="Star Icon" class="star-icon">
+                <div class="big-box-content">Title 10
+                </div>      
+            </div>
+          </div>
     </main>
     <script src="script.js"></script>
     </body>
-    </html>
+</html>
