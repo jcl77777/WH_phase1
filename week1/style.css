@@ -61,16 +61,16 @@ header .closebtn {
 display: none; /*  hide close icon */
 }
 
-
 /*smallbox area*/
 /*smallbox container*/
 .small-boxes-wrapper {
     width: 1200px; /*keep it within 1200px*/
     display: grid; /*use grid to layout*/
-    grid-template-columns: 373.33px 393.33px 393.33px; /* Define specific widths for each box */
+    grid-template-columns: 373.33px 393.33px 393.33px; /* Define specific widths for each box for aligning the big boxes*/
     column-gap: 20px;
     margin-right:20px;
   }
+
 /*each small box*/
   .small-box {
     height: 50px;
