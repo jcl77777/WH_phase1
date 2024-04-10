@@ -202,12 +202,12 @@ def get_number(index):
   elif index == 3:
     return 7
   else:
-    # Logic for calculating other terms based on even/odd index
-    if index % 3 == 0:  # Even index
+    # Logic for calculating other terms based on 3的倍數
+    if index % 3 == 0:  # index 3的倍數 
         return get_number(index - 1) - 1
-    elif index % 3 == 1:  # Odd index
+    elif index % 3 == 1:  # index 餘數=1
         return get_number(index - 1) + 4
-    elif index % 3 == 2:  # Even index
+    elif index % 3 == 2:  # index 餘數=2
         return get_number(index - 1) + 4 
   return 0
 
