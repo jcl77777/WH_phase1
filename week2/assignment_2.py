@@ -74,7 +74,6 @@ find_and_print(messages, "Qizhang") # print Leslie
 #Task2
 #check the time input from the user (hour, duration) against whatever exist in the booking dictionary
 def overlap(start1, duration1, start2, duration2):
-    """Checks if two time slots overlap."""
     end1 = start1 + duration1
     end2 = start2 + duration2
     return (start1 <= end2 and end1 >= start2)
