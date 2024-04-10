@@ -74,10 +74,12 @@ find_and_print(messages, "Qizhang") # print Leslie
 #Task2
 #check the time input from the user (hour, duration) against whatever exist in the booking dictionary
 def overlap(start1, duration1, start2, duration2):
-    #Checks if two time slots overlap.
-    #check if user input hour >= existing booked hour and user input hour < existing booked hour + existing booked duration 
-    #OR check if user input hour + duration > existing booked hour and user input hour + duration <= existing booked hour + existing booked duration
-    return (start1 >= start2 and start1 < start2 + duration2) or (start1 + duration1 > start2 and start1 + duration1 <= start2 + duration2)
+    """Checks if two time slots overlap."""
+    end1 = start1 + duration1
+    end2 = start2 + duration2
+    return (start1 <= end2 and end1 >= start2)
+    #calculate the end time for each time slot by adding the duration to the start time. 
+    #check if the start time of the first time slot is less than or equal to the end time of the second time slot, and the end time of the first time slot is greater than or equal to the start time of the second time slot.
     #example
     #print(book(consultants, 11, 2, "price")) Jenny got booked at 11-13pm for 2 hours
     #print(book(consultants, 10, 2, "price")) then Jenny cannot be booked at 10-12pm for 2 hours, instead John can be booked. 
@@ -100,7 +102,6 @@ def book(consultants, hour, duration, criteria):
                 #if overlap, then the consultant is not available, then is_available will be False
                 is_available = False
                 break  # Stop checking bookings for this consultant if already unavailable
-
         if is_available:  # Check availability after checking all bookings
             available_consultants.append(consultant)
 
@@ -126,7 +127,6 @@ def book(consultants, hour, duration, criteria):
         booked_consultant["bookings"] = []  # Create bookings list if it doesn't exist
     booked_consultant["bookings"].append({"start": hour, "duration": duration})  # Append booking
     return booked_consultant["name"]
-
 
 consultants = [
     {"name": "John", "rate": 4.5, "price": 1000},
