@@ -14,8 +14,8 @@ function findAndPrint(messages, currentStation) {
         if (messages[friend].includes(station) && station === "Xiaobitan") {
           // Calculate the distance using Math.abs function - absolute value of this difference between the current station in the message and the station number
           let distance = Math.abs(
-            parseInt(songpanXindianLineStations[currentStation]) -
-              parseInt(songpanXindianLineStations[station])
+            parseFloat(songpanXindianLineStations[currentStation]) -
+            parseFloat(songpanXindianLineStations[station])
           );
   
           // Check if the distance is smaller than the minDistance
@@ -30,8 +30,8 @@ function findAndPrint(messages, currentStation) {
         } // If not Xiaobitan station, then check other stations in message
         else if (messages[friend].includes(station) && station !== "Xiaobitan") {
           let distance = Math.abs(
-            parseInt(songpanXindianLineStations[currentStation]) -
-              parseInt(songpanXindianLineStations[station])
+            parseFloat(songpanXindianLineStations[currentStation]) -
+            parseFloat(songpanXindianLineStations[station])
           );
           if (distance < minDistance) {
             minDistance = distance;
@@ -68,10 +68,11 @@ function findAndPrint(messages, currentStation) {
     Jingmei: "15",
     Dapinglin: "16",
     Qizhang: "17",
-    "Xindian City Hall": "18",
-    Xiaobitan: "18",
-    Xindian: "19"
+    Xiaobitan: "17.1",
+    "Xindian City Hall": "17.6",
+    Xindian: "18"
   };
+
   
   const messages = {
     Leslie: "I'm at home near Xiaobitan station.",
@@ -84,6 +85,8 @@ function findAndPrint(messages, currentStation) {
   findAndPrint(messages, "Wanlong"); // Output: Mary
   findAndPrint(messages, "Songshan"); // Output: Copper
   findAndPrint(messages, "Qizhang"); // Output: Leslie
+  findAndPrint(messages, "Ximen"); // print Bob
+  findAndPrint(messages, "Xindian City Hall"); // print Vivian
 
 //Task2
 // Helper function to check for overlapping time slots
