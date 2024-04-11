@@ -13,7 +13,7 @@ def find_and_print(messages, current_station):
             #and check first if the Xiaobitan station in the message
             if station in message and station == "Xiaobitan":
                 #calculate the distance using abs function - absolute value of this difference between the current station in the message and the station number
-                distance = abs(int(songshan_xindian_line_stations[current_station]) - int(station_number))
+                distance = abs(float(songshan_xindian_line_stations[current_station]) - float(station_number))
                 #check if the distance is smaller than the min_distance
                 if distance < min_distance:
                     #set the min_distance = distance
@@ -24,7 +24,7 @@ def find_and_print(messages, current_station):
                     break
             #if not Xiaobitan station, then check other stations in message
             elif station in message and station != "Xiaobitan":
-                distance = abs(int(songshan_xindian_line_stations[current_station]) - int(station_number))
+                distance = abs(float(songshan_xindian_line_stations[current_station]) - float(station_number))
                 if distance < min_distance:
                     min_distance = distance
                     nearest_friend = friend
@@ -54,9 +54,9 @@ songshan_xindian_line_stations = {
     "Jingmei": "15", 
     "Dapinglin":"16", 
     "Qizhang": "17",
-    "Xindian City Hall":"18", 
-    "Xiaobitan":"18",
-    "Xindian":"19"
+    "Xiaobitan":"17.1",
+    "Xindian City Hall":"17.6", 
+    "Xindian":"18"
 }
 
 messages={
@@ -70,6 +70,8 @@ messages={
 find_and_print(messages, "Wanlong") # print Mary
 find_and_print(messages, "Songshan") # print Copper
 find_and_print(messages, "Qizhang") # print Leslie
+find_and_print(messages, "Ximen") # print Bob
+find_and_print(messages, "Xindian City Hall") # print Vivian
 
 #Task2
 #check the time input from the user (hour, duration) against whatever exist in the booking dictionary
