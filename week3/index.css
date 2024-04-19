@@ -1,0 +1,420 @@
+/*common area for the whole page*/
+body {
+    font-family: 'Times New Roman', Times, serif; /*font*/
+    margin: 0;
+    padding: 0;
+  }
+
+  .banner {
+    width: 100%; /*set the banner to 100% fit based on RWD*/
+    height: 250px;
+    background-color: lightblue;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .banner h1 {  
+    font-size: 40px; /*twice as base text*/
+    font-weight: bold;
+    text-align: center; 
+    margin: 0; /* Remove default margins for better centering */
+  }
+
+  main {
+    width: 1200px; /*Layout of main content should be fixed in 1200px width*/
+    padding: 20px; 
+    margin: 0 auto;  /* Center the content horizontally */
+    display: flex;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+    row-gap:20px;
+    justify-content: center;
+  }
+
+  .load-more-btn {
+    display: block; /* Ensure button takes up full width */
+}
+
+/*Requirement 1: 1200px < screen width <= 1920px*/
+  @media (min-width: 1200px) and (max-width: 1920px) {
+
+/*header area*/
+header {
+  font-size:20px;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /*Title and menu items should be vertically centered with each other.*/
+}
+/*header content*/
+header .header-content{
+font-weight: bold;
+}
+
+.menu-items{
+  display: inline-block;
+}
+
+/*header menu icon*/
+header .menu-icon {
+display: none; /*  hide close icon */
+}
+
+/*header close icon*/
+header .closebtn {
+display: none; /*  hide close icon */
+}
+
+/*smallbox area*/
+/*smallbox container*/
+.small-boxes-wrapper {
+    width: 1200px; /*keep it within 1200px*/
+    display: grid; /*use grid to layout*/
+    grid-template-columns: 373.33px 393.33px 393.33px; /* Define specific widths for each box for aligning the big boxes*/
+    column-gap: 20px;
+  }
+
+/*each small box*/
+  .small-box {
+    height: 50px;
+    display:flex;
+    text-align: center;
+    background-color: lightblue;
+    }
+
+/*each image in the small box*/
+  .small-box img {
+    width: 80px;
+    height: 100%;
+    object-fit: cover;
+  }
+/*each content in the small box*/
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+
+/*bigbox area*/
+/*bigbox container*/ 
+  .big-boxes-wrapper {
+    width: 1200px;
+    display: grid; 
+    grid-template-columns: 2fr repeat(4, 1fr); /* Define grid lines to have first 2x bigger than the rest */
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+/*each big box*/
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+/*each image of big box*/
+.big-box img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Background image covers the box */
+}
+
+/*each content in the big box*/
+.big-box .big-box-content {
+    position: absolute; /* Position content on top of background image */
+    width: 100%;
+    height: 30px; 
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    text-align: center;
+    line-height: 30px;  /* to center the content */
+    font-size:20px;
+    color: white; /*updated to white text */
+}
+
+/*each star icon in the big box*/
+.big-box .star-icon {
+    position: absolute; /* Make icon positionable within content */
+    top: 5px;
+    right: 5px;
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size  */
+  }
+}
+
+/*Requirement 2: 600px < screen width <= 1200px*/
+@media (min-width: 600px) and (max-width: 1200px) {
+
+/*header area*/
+header {
+    font-size:20px;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /*Title and menu items should be vertically centered with each other.*/
+}
+/*header content*/
+header .header-content{
+  font-weight: bold;
+}
+
+.menu-items{
+  display: inline-block;
+}
+
+/*header menu icon*/
+header .menu-icon {
+  display: none; /*  hide close icon */
+}
+
+/*header close icon*/
+header .closebtn {
+  display: none; /*  hide close icon */
+}
+  
+/*set the main to 90%*/
+  main {
+    width: 90%; 
+  }
+
+/*smallbox area*/
+/*smallbox container*/ 
+  .small-boxes-wrapper {
+    display:grid;
+    width: 100%; /* 100% width for single column */
+    grid-template-columns: repeat(2, 1fr); /* Two columns in first row */
+    grid-template-rows: 1fr;  /* First row fixed height, second row auto */
+    flex-wrap: wrap;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+/*each small box*/
+  .small-box {
+    height: 50px;
+    display:flex;
+    text-align: center;
+    background-color: lightblue;
+    }
+
+/*set only the last small box to 100% width*/
+  .small-boxes-wrapper .small-box:nth-child(3) { /* Style the third box */
+      grid-column: 1 / span 2; /* Spans both columns in the second row (100% width) */
+  }
+
+/*each image of small box*/
+  .small-box img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+  }
+/*each content of small box*/
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+
+/*bigbox area*/
+/*bigbox container*/ 
+  .big-boxes-wrapper {
+    width: 1200px;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* Four columns, 25% each (first two rows) */
+    grid-template-rows: repeat(2, 1fr) 1fr;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+ /*each bigbox*/
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+ /*set the 9th and 10th bigbox to split 50% 50% the window*/
+  .big-boxes-wrapper .big-box:nth-child(n+9) { /* Style the 9th and 10th box */
+      grid-column: span 2; /* Spans two columns in the last row (50% width) */
+  }
+
+  /*each image of bigbox*/
+  .big-box img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Background image covers the box */
+  }
+
+/*each content of bigbox*/
+  .big-box .big-box-content {
+      position: absolute; /* Position content on top of background image */
+      width: 100%;
+      height: 30px; 
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      text-align: center;
+      line-height: 30px;  /* to center the content */
+  }
+
+/*each star icon of bigbox*/
+  .big-box .star-icon {
+      position: absolute; /* Make icon positionable within content */
+      top: 5px;
+      right: 5px;
+      width: 20px; /* Adjust icon size */
+      height: 20px; /* Adjust icon size  */
+    }
+}
+
+/*Requirement 3: 360px < screen width <= 600px*/
+@media (min-width: 360px) and (max-width: 600px) {
+
+  /*header area*/
+header {
+  font-size: 20px;
+  background-color: white;
+  padding: 19.5px 20px; /*make sure the header is aligned with all versions*/
+}
+
+header .header-container{
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; 
+  align-items: center; /* Vertically align child elements */
+}
+
+/* Content of the header */
+header .header-content {
+  font-weight: bold;
+}
+
+/* Header menu icon */
+header .menu-icon {
+  cursor: pointer;
+  font-size: 20px;
+  align-self: center;
+}
+
+  /*side navigation area*/
+  .side-nav {
+    width:0px; /*side nav closed initially*/
+    height: 100%;
+    position: fixed; /*fixed to the right of the screen*/
+    z-index: 1; /*full screen */
+    top: 0; /* navbar no space on the top */
+    right: 0; /* navbar no space on the right*/
+    background-color: white;
+    overflow-x: hidden; /* not to show the nav bar on the right side */
+    padding-top: 60px; /* Space for the header */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5); /* Shadow on the right side */
+    display: flex;
+    flex-direction: column; /* stacks children vertically */
+  }
+ 
+  .side-nav.open{
+    width:300px;
+  }
+/*each menu item in side navigation area*/
+  .menu-items {
+    padding: 20px 20px; /* Vertical and horizontal padding */
+    font-size: 20px; 
+    cursor: pointer; /* cursor pointer for each item */
+    display: block; /* makes each link take up the full width of its line */
+    text-decoration: none; /* removes the underline from links */
+    color: gray; 
+    text-align:center; /* centers the text */
+    width: 250px;
+  }
+  
+/*header close btn*/
+  .side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px; /* placement away from the right corner*/ 
+    font-size: 30px;
+    margin-left: 30px;
+  }
+
+/*set the main to 90%*/
+  main {
+    width: 90%; /* Adjusts width to 90% at the breakpoint */
+  }
+
+/*smallbox area*/
+/*smallbox container*/
+  .small-boxes-wrapper {
+    width:100%;
+    display:grid;
+    grid-template-columns:  1fr; /* one column  */
+    flex-wrap: wrap;
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+/*each small box*/
+  .small-box {
+    height: 50px;
+    display:flex;
+    text-align: center;
+    background-color: lightblue;
+    }
+ 
+/*each image of small box*/    
+  .small-box img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+/*each content of small box*/    
+  .small-box p {
+    margin-left: 10px; /* Space between image and text */
+  }
+
+/*big box area*/
+/*big box container*/
+  .big-boxes-wrapper {
+    width:100%;
+    display: grid; 
+    grid-template-columns: 1fr; /* Define grid lines to one at a time */
+    overflow: hidden;
+    column-gap: 20px;
+    row-gap:20px;
+  }
+
+/*each big box*/ 
+  .big-box {
+    position: relative; /* for star icon positioning */
+    height: 200px; /* Set height for all boxes */
+    }
+
+/*each image of bigbox*/
+.big-box img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Background image covers the box */
+}
+
+/*each content of bigbox*/
+.big-box .big-box-content {
+    position: absolute; /* Position content on top of background image */
+    width: 100%;
+    height: 30px; 
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    text-align: center;
+    line-height: 30px;  /* to center the content */
+}
+
+/*each star icon of bigbox*/
+.big-box .star-icon {
+    position: absolute; /* Make icon positionable within content */
+    top: 5px;
+    right: 5px;
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size  */
+  }
+}
+
