@@ -7,6 +7,13 @@ from bs4 import BeautifulSoup
 import csv
 import ssl
 
+#highly discouraged using this due to security
+#recommend to use import requests
+#Option 1: Ignore certificate verification (NOT RECOMMENDED for production)
+#response = requests.get('https://example.com', verify=False)
+#Option 2: Use a custom CA bundle (for self-signed certificates)
+#custom_ca_bundle = '/path/to/your/custom_ca.pem'  # Replace with your CA certificate path
+#response = requests.get('https://example.com', verify=custom_ca_bundle)
 ssl._create_default_https_context = ssl._create_unverified_context
 
 url = "https://www.ptt.cc/bbs/Lottery/index.html"
@@ -80,7 +87,7 @@ def parse_page_metadata(url):
                 publish_time = "0"
                 publish_time_list.append(publish_time)
             #print(publish_time_list)
-            
+    #capture the next url for page 2 and page 3     
     next_url = "https://www.ptt.cc" + soup.find("a", string = "‹ 上頁")["href"]
     print(next_url)   
     return next_url
