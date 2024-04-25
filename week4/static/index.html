@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+    <body>
+        <!---title section-->
+        <header>
+            <div class="header">歡迎光臨，請輸入帳號密碼</div>
+        </header>
+        <main>
+            <div class="title">登入系統</div>
+                <div class="form">
+                    <form id="loginForm" action="index.html" method="post">
+                        <div class="form-group">
+                            <div class="account-container">
+                                <label for="account">帳號</label>
+                                <input type="text" name="account" id="account" placeholder="請輸入帳號" required>
+                            </div>
+                            <div class="password-container">
+                                <label for="password">密碼</label>
+                                <input type="password" name="password" id="password" placeholder="請輸入密碼" required>
+                            </div>
+                            <div class="checkbox-container">
+                                <label for="myCheckbox">同意條款</label>
+                                <input type="checkbox" id="termsCheckbox" name="termsCheckbox">
+                            </div>
+                            <div class="button-container">
+                                <button type="submit">登入</button>
+                            </div>
+        </main>
+        <script src="index.js"></script>
+    </body>
+
+</html>
