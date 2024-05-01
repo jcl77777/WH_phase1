@@ -18,3 +18,5 @@ CREATE TABLE users (
     time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
+4. Image
+![Database screenshot](task1.png)
