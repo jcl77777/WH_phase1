@@ -1,8 +1,12 @@
-#Task2
+# Task2
 1. create database named "website"
-`CREATE DATABASE website;`
+```sql
+CREATE DATABASE website;
+```
 2. open "website" DB
-`USE website;`
+```sql
+USE website;
+```
 3. create table inside website DB
 ```sql
 CREATE TABLE users (
