@@ -139,10 +139,52 @@ CREATE TABLE message (
 ![Database screenshot](task5_1.png)
 2. select all messages, including sender names
 ```sql
-SELECT m.*, users.name AS name
+SELECT m.*, u.name AS name, u.id
 FROM message m
-INNER JOIN users ON m.member_id = users.id;
+INNER JOIN users u
+ON m.member_id = u.id;
 
 ```
 ### Results
 ![Database screenshot](task5_2.png)
+3. select all messages, including sender names, where sender name = 'test'
+```sql
+SELECT m.*, u.name AS name
+FROM message m
+INNER JOIN users u
+ON m.member_id = u.id
+WHERE username = 'test';
+
+```
+### Results
+![Database screenshot](task5_3.png)
+4. get the average like count of messages where sender username equals to test.
+```sql
+SELECT AVG(like_count) as avg
+FROM (
+SELECT m.*, u.name AS name
+FROM message m
+INNER JOIN users u
+ON m.member_id = u.id
+WHERE username = 'test'
+) as subquery;
+
+```
+### Results
+![Database screenshot](task5_4.png)
+5. get the average like count of messages GROUP BY sender username
+```sql
+SELECT u.username AS sender_username, AVG(m.like_count) AS avg_like_count
+FROM message m
+JOIN users u ON m.member_id = u.id
+GROUP BY u.username;
+task
+```
+### Results
+![Database screenshot](task5_5.png)
+
+## note on sqldump
+command line on the terminal using username 'root' and database 'website'
+```
+mysqldump -u root -p website > data.sql
+```
