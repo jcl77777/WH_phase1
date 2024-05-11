@@ -37,13 +37,14 @@
             <!--render all messages from database-->
             <div class="display-container">
                 {% for message in messages %}
-                <p>{{ message['user_name'] }} : {{ message['content'] }}
-                    {% if request.session.get('id') == message['member_id'] %}
-                    <button type="button" onclick="return confirmDeleteMessage( message['id'] )">Delete</button>
+                <p>{{ message[3] }} : {{ message[2] }}
+                    {% if request.session.get('id') == message[1] %}
+                    <button type="Button" id="delete" onclick="return confirmDeleteMessage( message[0] )"> x </button>
                     {% endif %}
                 </p>
                 {% endfor %}
             </div> 
         </main>
+        <script src="static/index.js"></script>
     </body>
 </html>
