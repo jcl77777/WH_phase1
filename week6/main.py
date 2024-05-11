@@ -205,28 +205,6 @@ def insert_message(member_id: int, content: str):
     finally:
         # Close the database connection
         db_connection.close()
-'''
-def delete_message_by_id(id: int):    
-    # Configure the database connection
-    db_connection = database_connection(db_config)   
-    if not db_connection:
-        raise Exception("Database connection error")
-    try:
-        with db_connection.cursor() as db_cursor:
-            # Execute a query to delete the message
-            query = "DELETE FROM message WHERE id = %s"
-            db_cursor.execute(query, (id,))
-
-        # Commit the transaction
-        db_connection.commit()
-
-    except mysql.connector.Error as e:
-        # Handle any database errors
-        print(f"Error deleting message: {e}")
-
-    finally:
-        pass
-'''
 
 #homepage rendering index.html
 @app.get("/")
@@ -293,7 +271,7 @@ async def signin(request: Request):
     else: 
         error_message = quote("Username or password is not correct")
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
-    
+
 @app.get("/member",response_class=HTMLResponse)
 async def get_messages(request: Request):
     db_connection = database_connection(db_config)
@@ -302,35 +280,20 @@ async def get_messages(request: Request):
    
     messages = []
     try:
-        # Create a cursor
         with db_connection.cursor() as db_cursor:
-            # Execute a query to fetch messages with user IDs
-            query = "SELECT id, member_id, content FROM message ORDER BY TIME DESC"
+            # Execute a query to fetch messages with user names using JOIN
+            query = """
+                SELECT m.id, m.member_id, m.content, u.name
+                FROM message m
+                JOIN users u ON m.member_id = u.id
+                ORDER BY m.time DESC
+            """
             db_cursor.execute(query)
-            messages_data = db_cursor.fetchall()
-
-            # Iterate over the messages to fetch user names
-            for message_data in messages_data:
-                message = {}
-                message['id'] = message_data[0]
-                message['content'] = message_data[2]
-
-                # Fetch the user name based on member_id
-                user_query = "SELECT name FROM users WHERE id = %s"
-                db_cursor.execute(user_query, (message_data[1],))
-                user_data = db_cursor.fetchone()
-
-                if user_data:
-                    message['user_name'] = user_data[0]
-                else:
-                    message['user_name'] = "Unknown"
-
-                messages.append(message)
+            messages = db_cursor.fetchall()
 
     except mysql.connector.Error as e:
-        # Handle any database errors
         print(f"Error fetching messages: {e}")
-
+    
     finally:
         # Close the database connection
         if 'db_connection' in locals():
@@ -365,19 +328,23 @@ async def createMessage(request: Request):
         error_message = quote("Failed to insert message")
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
 
-'''
-@app.post("/deleteMessage") #delete message via post method
-async def delete_message(request: Request):
-    message_id = request.form.get("id")
-    if not message_id:
-        error_message = quote("Message ID not found in request")
-        return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
+@app.post("/deleteMessage")
+async def delete_message(message_id: int = Form(...)):
+    db_connection = database_connection(db_config)
 
-    # Delete the message from the database
-    delete_message_by_id(message_id)
+    try:
+        async with db_connection.cursor() as db_cursor:
+            # Delete the message from the database
+            query = "DELETE FROM message WHERE id = %s"
+            await db_cursor.execute(query, (message_id,))
+            await db_connection.commit()
 
-    # Redirect back to the member page
-    return RedirectResponse(url="/member", status_code=303)
-'''
+        return RedirectResponse(url="/member", status_code=303)
+
+    except Exception as e:
+        print(f"Error deleting message: {e}")
+        return {"message": "Error deleting message"}
+
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000)
