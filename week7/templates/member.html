@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+    <body>
+        <!---title section-->
+        <header>
+            <div class="header">歡迎光臨，這是會員頁</div>
+        </header>
+        <main>
+            <div class="title"> {{ request.session["name"] }}，歡迎登入系統</div>
+            <a href="/signout">登出系統</a>
+            <!--query by username and show results with Name (username)-->
+            <div class="title">查詢會員姓名</div>
+            <div class="form">
+                <form id="queryForm">
+                    <div class="form-group">
+                        <div class="content-container">
+                            <label for="account"></label>
+                            <input type="text" name="account" id="account">
+                            <div class="button-container">
+                                <button type="submit">查詢</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="result" id="result"></div>
+           <!--update name once queried and update name in the DB -->
+           <div class="title">更新我的姓名</div>
+           <div class="form">
+               <form id="updateQueryForm" action="/api/member" method="patch">
+                   <div class="form-group">
+                       <div class="content-container">
+                           <label for="updateName"></label>
+                           <input type="text" name="updateName" id="updateName">
+                           <div class="button-container">
+                                <button type="submit">更新</button>
+                           </div>
+                        </div>
+                   </div>
+               </form>
+           </div>
+           <div class="update" id='update'></div>
+            <!--break line-->
+            <hr>
+            <!--break line-->
+            <div class="title">快來留言吧</div>
+            <div class="form">
+                <form id="messageForm" action="/createMessage" method="post">
+                    <div class="form-group">
+                        <div class="content-container">
+                            <label for="content">內容</label>
+                            <input type="text" name="content" id="content">
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">送出</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--break line-->
+            <hr>
+            <!--break line-->
+            <!--render all messages from database-->
+            <div class="display-container">
+                {% for message in messages %}
+                <p>{{ message[3] }} : {{ message[2] }}
+                    {% if request.session.get('id') == message[1] %}
+                    <button type="Button" id="delete" onclick="return confirmDeleteMessage( message[0] )"> x </button>
+                    {% endif %}
+                </p>
+                {% endfor %}
+            </div> 
+        </main>
+        <script src="static/index.js"></script>
+    </body>
+</html>
