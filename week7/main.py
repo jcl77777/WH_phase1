@@ -419,21 +419,33 @@ async def delete_message(message_id: int = Form(...)):
 
 
 @app.get('/api/member', response_model=MemberResponse)
-def read_member(account: str = Query(..., alias="account")):
+def read_member(request: Request, account: str = Query(..., alias="account")):
+    #to restrict 
+    session_data = request.session
+    if not session_data.get('account', None):
+        return  JSONResponse(content={"data": None})
+    
     if not account:
-        raise HTTPException(status_code=400, detail="Username is required")
+        raise  JSONResponse(content={"data": None})
 
     #print(f"Fetching member details for account: {account}")
     member = query_member_details(account)
     #print(f"Member data: {member}") 
 
     if member:
-        member_response = MemberResponse(id=member.id, name=member.name, account=member.account)
-        #print(f"Member data: {member_response}") 
-        return JSONResponse(content={"response": member_response.dict()})
+        user_data = {
+            "id": member.id,
+            "name": member.name,
+            "account": member.account
+        }
+        #member_response = MemberResponse(id=member.id, name=member.name, account=member.account)
+        #print(f"user data: {user_data}") 
+        return JSONResponse(content={"response": user_data})
+    
     else:
-        return {"data": None}
-        #print(f"{data}")
+        response = JSONResponse(content={"data": None})
+        #print(f"Response content: {response.body}")
+        return response
 
 @app.patch('/api/member')
 def update_member_name(update_request: UpdateNameRequest = Body(...), current_user:Optional[MemberResponse]=Depends(get_current_user)):
