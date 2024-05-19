@@ -451,7 +451,7 @@ def read_member(request: Request, username: str = Query(..., alias="username")):
 @app.patch('/api/member')
 def update_member_name(update_request: UpdateNameRequest = Body(...), current_user:Optional[MemberResponse]=Depends(get_current_user)):
     if not current_user:
-        return {"data": None}
+        return JSONResponse(content={"data": None})
     #print(f"Current User (from get_current_user): {current_user}") 
 
     db_connection = None
@@ -474,12 +474,12 @@ def update_member_name(update_request: UpdateNameRequest = Body(...), current_us
         db_connection.commit()
             
         if cursor.rowcount == 0:
-            return {"data": None}
+            return JSONResponse(content={"data": None})
         return {"name": update_request.name, "ok": True}
     except Exception as e:
         db_connection.rollback()
         print(f"Exception occurred: {e}")  
-        return {"data": None}
+        return JSONResponse(content={"data": None})
     finally:
         if cursor:
             cursor.close()
