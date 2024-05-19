@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (queryForm) {
       queryForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const username = document.getElementById('account').value;
-        //console.log('Username:', username); 
+        const username = document.getElementById('username').value;
+        console.log('Username:', username); 
         const resultDiv = document.getElementById('result');
         
         // Clear previous results
         resultDiv.innerHTML = '';
-        //console.log(resultDiv); 
+        console.log(resultDiv); 
 
         // Validate input
         if (!username) {
@@ -42,27 +42,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Fetch member data
-        fetch(`http://127.0.0.1:8000/api/member?account=${username}`)
-            .then(response => response.json())
+        fetch(`http://127.0.0.1:8000/api/member?username=${username}`)
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log(response); // Log the response
+                return response.json();
+            })
+
             .then(data => {
                 console.log('Data:', data); 
-                if (data && data.response) { // Check for data and "response" property
-                    const memberData = data.response; // Access member data
+                if (data && data.username) { // Check for data and "username" property
+                    const memberData = data; // Access member data
+                    console.log('memberData:', memberData)
                     resultDiv.innerHTML = `
-                        <p>${memberData.account} (${memberData.name})</p>
+                        <p>${memberData.username} (${memberData.name})</p>
                     `;
-                } else {
+                    } else {
                         resultDiv.innerHTML = 'No Data';
-                }
-                
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                resultDiv.innerHTML = 'An error occurred while fetching data.';
+                    }          
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultDiv.innerHTML = 'An error occurred while fetching data.';
+                });
             });
+        }  
     });
-   }  
-});
 
 //update name 
 const updateForm = document.getElementById('updateQueryForm');
