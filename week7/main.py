@@ -217,7 +217,6 @@ def query_member_details(account: str)->Optional[MemberResponse]:
           result = db_cursor.fetchone()
 
       if result:
-          # Return the user details as a tuple
           return MemberResponse(**result)
       else:
           # User not found
@@ -419,39 +418,41 @@ async def delete_message(message_id: int = Form(...)):
 
 
 @app.get('/api/member', response_model=MemberResponse)
-def read_member(request: Request, account: str = Query(..., alias="account")):
-    #to restrict 
+def read_member(request: Request, username: str = Query(..., alias="username")):
+    #to restrict non-signed in users
     session_data = request.session
     if not session_data.get('account', None):
         return  JSONResponse(content={"data": None})
-    
+    account = username
+
     if not account:
         raise  JSONResponse(content={"data": None})
 
-    #print(f"Fetching member details for account: {account}")
+    print(f"Fetching member details for username: {username}")
+    
     member = query_member_details(account)
-    #print(f"Member data: {member}") 
+    print(f"Member data: {member}") 
 
     if member:
         user_data = {
             "id": member.id,
             "name": member.name,
-            "account": member.account
+            "username": member.account
         }
         #member_response = MemberResponse(id=member.id, name=member.name, account=member.account)
-        #print(f"user data: {user_data}") 
-        return JSONResponse(content={"response": user_data})
+        print(f"user data: {user_data}") 
+        return JSONResponse(content={"data": user_data})
     
     else:
         response = JSONResponse(content={"data": None})
-        #print(f"Response content: {response.body}")
+        print(f"Response content: {response.body}")
         return response
 
 @app.patch('/api/member')
 def update_member_name(update_request: UpdateNameRequest = Body(...), current_user:Optional[MemberResponse]=Depends(get_current_user)):
     if not current_user:
-        raise HTTPException(status_code =401, details="Not authenticated")
-    #print(f"Current User (from get_current_user): {current_user}") 
+        raise HTTPException(status_code=401, detail={"data": None})
+    print(f"Current User (from get_current_user): {current_user}") 
 
     db_connection = None
     cursor = None
