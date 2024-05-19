@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Form, Depends, HTTPException, Query, Body #run app via fastapi, request from user input via form
+from fastapi import FastAPI, Request, Form, Depends, Query, Body #run app via fastapi, request from user input via form
 from urllib.parse import quote, parse_qs # quote specific message in the URL
 from fastapi.staticfiles import StaticFiles # serve static files from static folder
 from fastapi.templating import Jinja2Templates #render pre-defined html in templates folder
@@ -452,7 +452,7 @@ def read_member(request: Request, username: str = Query(..., alias="username")):
 def update_member_name(update_request: UpdateNameRequest = Body(...), current_user:Optional[MemberResponse]=Depends(get_current_user)):
     if not current_user:
         return {"data": None}
-    print(f"Current User (from get_current_user): {current_user}") 
+    #print(f"Current User (from get_current_user): {current_user}") 
 
     db_connection = None
     cursor = None
@@ -474,11 +474,12 @@ def update_member_name(update_request: UpdateNameRequest = Body(...), current_us
         db_connection.commit()
             
         if cursor.rowcount == 0:
-            raise HTTPException(status_code=404, detail="User not found")
+            return {"data": None}
         return {"name": update_request.name, "ok": True}
     except Exception as e:
         db_connection.rollback()
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+        print(f"Exception occurred: {e}")  
+        return {"data": None}
     finally:
         if cursor:
             cursor.close()
